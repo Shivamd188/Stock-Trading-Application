@@ -1,0 +1,24 @@
+/* Footer Styling */
+.footer {
+    background-color: #343a40; /* Dark background for footer */
+    color: #fff; /* White text */
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #f8f9fa; /* Lighter color on hover */
+}

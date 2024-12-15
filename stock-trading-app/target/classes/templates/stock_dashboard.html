@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS for Dashboard -->
+    <link rel="stylesheet" th:href="@{/css/stock_dashboard.css}">
+</head>
+<body>
+
+<div class="container">
+    <h3>Live Price for Stock: <span th:text="${symbol}"></span></h3>
+    <p>Current Price: $<span th:text="${livePrice}"></span></p>
+
+    <form action="/stock-dashboard" method="get">
+        <input type="text" name="symbol" placeholder="Enter Stock Symbol">
+        <button type="submit" class="btn btn-primary">Get Live Price</button>
+    </form>
+</div>
+
+
+
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+</body>
+</html>

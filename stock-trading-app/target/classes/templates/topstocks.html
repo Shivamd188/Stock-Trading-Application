@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Stocks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Stock-Card.css">
+</head>
+<body>
+    <section id="top-stocks" th:fragment="top-stocks">
+        <section class="my-4">
+            <h2 class="text-center">Top Stocks</h2>
+            <div class="row">
+                <!-- Top Gainers -->
+                <div class="col-md-4">
+                    <h3 class="text-center">Top Gainers</h3>
+                    <div class="stock-list" id="gainers-list">
+                        <!-- Display all items -->
+                        <div th:each="stock : ${topGainers}" class="stock-card hidden">
+                            <div class="stock-ticker" th:text="${stock.ticker}">Ticker</div>
+                            <div class="stock-price">
+                                <span th:text="'$' + ${stock.price}">Price</span>
+                            </div>
+                            <div class="stock-change" th:classappend="${#strings.contains(stock.changePercentage, '-')} ? 'negative' : 'positive'">
+                                <span th:text="'Change: $' + ${stock.changeAmount}">Change Amount</span> |
+                                <span th:text="'(' + ${stock.changePercentage} + ')'">Change Percentage</span>
+                            </div>
+                            <div class="stock-volume">
+                                <small>Volume: <span th:text="${stock.volume}">Volume</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Losers -->
+                <div class="col-md-4">
+                    <h3 class="text-center">Top Losers</h3>
+                    <div class="stock-list" id="losers-list">
+                        <!-- Display all items -->
+                        <div th:each="stock : ${topLosers}" class="stock-card hidden">
+                            <div class="stock-ticker" th:text="${stock.ticker}">Ticker</div>
+                            <div class="stock-price">
+                                <span th:text="'$' + ${stock.price}">Price</span>
+                            </div>
+                            <div class="stock-change" th:classappend="${#strings.contains(stock.changePercentage, '-')} ? 'negative' : 'positive'">
+                                <span th:text="'Change: $' + ${stock.changeAmount}">Change Amount</span> |
+                                <span th:text="'(' + ${stock.changePercentage} + ')'">Change Percentage</span>
+                            </div>
+                            <div class="stock-volume">
+                                <small>Volume: <span th:text="${stock.volume}">Volume</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Most Traded -->
+                <div class="col-md-4">
+                    <h3 class="text-center">Most Traded</h3>
+                    <div class="stock-list" id="traded-list">
+                        <!-- Display all items -->
+                        <div th:each="stock : ${topTraded}" class="stock-card hidden">
+                            <div class="stock-ticker" th:text="${stock.ticker}">Ticker</div>
+                            <div class="stock-price">
+                                <span th:text="'$' + ${stock.price}">Price</span>
+                            </div>
+                            <div class="stock-change" th:classappend="${#strings.contains(stock.changePercentage, '-')} ? 'negative' : 'positive'">
+                                <span th:text="'Change: $' + ${stock.changeAmount}">Change Amount</span> |
+                                <span th:text="'(' + ${stock.changePercentage} + ')'">Change Percentage</span>
+                            </div>
+                            <div class="stock-volume">
+                                <small>Volume: <span th:text="${stock.volume}">Volume</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Load More Button -->
+            <div class="text-center mt-4">
+                <button id="load-more" class="btn btn-primary" onclick="loadMoreStocks()">Load More</button>
+            </div>
+        </section>
+    </section>
+
+    <script>
+        function loadMoreStocks() {
+            // Get all hidden stock items in the section
+            const hiddenItems = document.querySelectorAll('.stock-card.hidden');
+            const button = document.getElementById('load-more');
+
+            // Show the next 6 hidden items
+            let shown = 0;
+            hiddenItems.forEach(item => {
+                if (shown < 6) {
+                    item.classList.remove('hidden');
+                    shown++;
+                }
+            });
+
+            // Hide button if all items are shown
+            if (document.querySelectorAll('.stock-card.hidden').length === 0) {
+                button.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Header</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS for Header -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+</head>
+<body>
+    <header>
+        <!-- Bootstrap Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Stock Trading App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Links for unauthenticated users -->
+                    <li class="nav-item" th:if="${user == null}">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item" th:if="${user == null}">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item" th:if="${user == null}">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+
+                    <!-- Links for authenticated users -->
+                    <li class="nav-item" th:if="${user != null}">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item" th:if="${user != null}">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                    <li class="nav-item" th:if="${user != null}">
+                        <a class="nav-link text-danger" href="/logout" onclick="return confirmLogout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function confirmLogout() {
+            return confirm("Are you sure you want to logout?");
+        }
+    </script>
+</body>
+</html>

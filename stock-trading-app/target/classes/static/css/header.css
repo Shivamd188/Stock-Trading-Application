@@ -1,0 +1,25 @@
+/* Header Styling */
+.navbar {
+    padding: 15px 30px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-left: 15px;
+}
+
+.nav-link:hover {
+    color: #f8f9fa; /* Lighter color on hover */
+}
+
+/* Style for the nav-toggler on smaller screens */
+.navbar-toggler {
+    border-color: rgba(255,255,255,0.1);
+}

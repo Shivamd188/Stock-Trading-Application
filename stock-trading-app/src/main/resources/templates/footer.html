@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Footer</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS for Footer -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+</head>
+<body>
+    <footer class="footer bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Stock Trading App. All Rights Reserved.</p>
+        <button class="btn btn-light" onclick="toggleTheme()">Toggle Theme</button>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle("bg-dark");
+            body.classList.toggle("text-white");
+            body.classList.toggle("bg-light");
+            body.classList.toggle("text-dark");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Trading Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Stock-Card.css">
+</head>
+<body style="background-color: #8B0000; color: white;">
+
+<!-- Header -->
+<header class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Stock Trading App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/news">Market News</a></li>
+            <li class="nav-item"><a class="nav-link" href="/ipo-news">IPO News</a></li>
+            <li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="container my-4">
+    <!-- Hero Section -->
+   <section class="jumbotron text-center">
+    <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <!-- Carousel Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExample" data-slide-to="1"></li>
+            <li data-target="#carouselExample" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Carousel Images -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/file.jpg" class="d-block w-100" alt="First Image">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/file2.jpg" class="d-block w-100" alt="Second Image">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/file3.jpg" class="d-block w-100" alt="Third Image">
+            </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Hero Section Content -->
+    <div class="mt-4">
+        <h1 class="display-4">Invest in Your Future</h1>
+        <p class="lead">Real-Time Stock Trading and Market Insights</p>
+        <a href="/register" class="btn btn-primary btn-lg">Start Trading Now</a>
+    </div>
+</section>
+
+
+    <!-- Top Stocks Section -->
+    <section id="top-stocks">
+        <h2 class="text-center">Top Stocks</h2>
+        <div class="row">
+            <!-- Top Gainers -->
+            <div class="col-md-4">
+                <h3 class="text-center">Top Gainers</h3>
+                <div class="stock-list">
+                    <div th:each="stock : ${topGainers}" class="stock-card">
+                        <div class="stock-ticker" th:text="${stock.ticker}">Ticker</div>
+                        <div class="stock-price">
+                            <span th:text="'$' + ${stock.price}">Price</span>
+                        </div>
+                        <div class="stock-change" th:classappend="${#strings.contains(stock.changePercentage, '-')} ? 'negative' : 'positive'">
+                            <span th:text="'Change: $' + ${stock.changeAmount}">Change Amount</span> |
+                            <span th:text="'(' + ${stock.changePercentage} + ')'">Change Percentage</span>
+                        </div>
+                        <div class="stock-volume">
+                            <small>Volume: <span th:text="${stock.volume}">Volume</span></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Losers -->
+            <div class="col-md-4">
+                <h3 class="text-center">Top Losers</h3>
+                <div class="stock-list">
+                    <div th:each="stock : ${topLosers}" class="stock-card">
+                        <div class="stock-ticker" th:text="${stock.ticker}">Ticker</div>
+                        <div class="stock-price">
+                            <span th:text="'$' + ${stock.price}">Price</span>
+                        </div>
+                        <div class="stock-change" th:classappend="${#strings.contains(stock.changePercentage, '-')} ? 'negative' : 'positive'">
+                            <span th:text="'Change: $' + ${stock.changeAmount}">Change Amount</span> |
+                            <span th:text="'(' + ${stock.changePercentage} + ')'">Change Percentage</span>
+                        </div>
+                        <div class="stock-volume">
+                            <small>Volume: <span th:text="${stock.volume}">Volume</span></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Most Traded -->
+            <div class="col-md-4">
+                <h3 class="text-center">Most Traded</h3>
+                <div class="stock-list">
+                    <div th:each="stock : ${topTraded}" class="stock-card">
+                        <div class="stock-ticker" th:text="${stock.ticker}">Ticker</div>
+                        <div class="stock-price">
+                            <span th:text="'$' + ${stock.price}">Price</span>
+                        </div>
+                        <div class="stock-change" th:classappend="${#strings.contains(stock.changePercentage, '-')} ? 'negative' : 'positive'">
+                            <span th:text="'Change: $' + ${stock.changeAmount}">Change Amount</span> |
+                            <span th:text="'(' + ${stock.changePercentage} + ')'">Change Percentage</span>
+                        </div>
+                        <div class="stock-volume">
+                            <small>Volume: <span th:text="${stock.volume}">Volume</span></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Show More Button (Non-functional for now) -->
+        <div class="text-center mt-4">
+            <button class="btn btn-secondary" disabled>Show More</button>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news-section" class="container my-4">
+    <h2 class="text-center">Market News</h2>
+    <div class="row">
+        <div class="col-md-4" th:each="news : ${newsList}">
+            <div class="card mb-4">
+                <img th:src="${news.imageUrl}" class="card-img-top" alt="News Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${news.title}">News Title</h5>
+                    <p class="card-text" th:text="${news.description}">News Summary</p>
+                    <p class="card-text">
+                        <small class="text-muted" th:text="${news.publishedAt}">Published Date</small>
+                        <small class="text-muted" th:text="${news.source}">Source</small>
+                    </p>
+                    <a th:href="${news.url}" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="/news" class="btn btn-secondary">View All News</a>
+    </div>
+</section>
+    
+    
+    </main>
+    
+    
+
+<!-- Footer -->
+<footer class="text-center py-4 bg-light mt-5">
+    <div class="container">
+        <p>&copy; 2024 Stock Trading App. All Rights Reserved.</p>
+        <p><a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $('.carousel').carousel({
+        interval: 4000 // 4 seconds
+    });
+</script>
+
+<script></script>
+console.log("News List from Backend:", newsList);
+</body>
+</html>

@@ -1,0 +1,43 @@
+/* General styles */
+body {
+    background-color: #f8f9fa; /* Light gray background for a clean look */
+    color: #343a40; /* Dark text color for readability */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Custom styles for the header */
+h1 {
+    color: #007bff; /* Bootstrap primary blue for a vibrant header */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Lead paragraph styling */
+p.lead {
+    font-size: 1.25rem;
+    color: #6c757d; /* Muted color for subheading */
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Section styling */
+section {
+    padding: 50px 0;
+}
+
+.container {
+    background-color: #ffffff; /* White background for the content area */
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+

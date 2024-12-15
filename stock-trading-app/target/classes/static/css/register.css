@@ -1,0 +1,18 @@
+/* Register Page Styling */
+body {
+    background-color: #f8f9fa;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.btn {
+    margin-top: 20px;
+}

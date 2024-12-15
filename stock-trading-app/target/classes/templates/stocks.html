@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+    <link rel="stylesheet" href="/css/stockpagination.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            margin: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .tabs button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tabs button.active {
+            background-color: #0073e6;
+            color: white;
+        }
+        .search-box {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .search-box input {
+            width: 80%;
+            padding: 8px;
+        }
+        .search-box button {
+            padding: 8px 15px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pagination a {
+            padding: 8px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            background-color: #f1f1f1;
+            color: #0073e6;
+            border-radius: 5px;
+        }
+        .pagination a.active {
+            background-color: #0073e6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock Listings</h1>
+    </div>
+    <div class="container">
+        <!-- Tabs for US and Indian stocks -->
+        <div class="tabs">
+            <button class="active" onclick="window.location.href='/stocks/us?page=0&size=10'">US Stocks</button>
+            <button onclick="window.location.href='/stocks/nse?page=0&size=10'">Indian Stocks</button>
+        </div>
+
+        <!-- Search box -->
+        <div class="search-box">
+            <form action="" method="GET">
+                <input type="text" name="searchTerm" placeholder="Search stocks..." value="${searchTerm}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Stock Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticker Symbol</th>
+                    <th>Company Name</th>
+                    <th>Industry</th>
+                    <th>Market Cap</th>
+                </tr>
+            </thead>
+            <tbody>
+    <tr th:each="stock : ${stocks}">
+        <td><a th:href="@{${stockType == 'us' ? '/stockinfo/us/' : '/stockinfo/nse/'} + ${stock.tickerSymbol}}" 
+               th:text="${stock.tickerSymbol}"></a></td>
+        <td th:text="${stock.tickerName}"></td>
+        <td th:text="${stock.industryType}"></td>
+        <td th:text="${stock.marketCap}"></td>
+    </tr>
+</tbody>
+
+        </table>
+
+       <div class="pagination">
+    <ul>
+        <!-- Previous Button -->
+        <li th:classappend="${currentPage == 0} ? 'disabled'">
+            <a th:href="@{${stockType == 'us' ? '/stocks/us' : '/stocks/nse'}(page=${currentPage - 1}, searchTerm=${searchTerm})}" 
+               aria-label="Previous">&laquo;</a>
+        </li>
+
+        <!-- First Page Link -->
+        <li th:if="${currentPage > 2}">
+            <a th:href="@{${stockType == 'us' ? '/stocks/us' : '/stocks/nse'}(page=0, searchTerm=${searchTerm})}">1</a>
+        </li>
+
+        <!-- Ellipsis Before Current Pages -->
+        <li th:if="${currentPage > 3}">
+            <span>...</span>
+        </li>
+
+        <!-- Dynamic Page Numbers -->
+        <li th:each="pageNumber : ${#numbers.sequence(currentPage - 2 > 0 ? currentPage - 2 : 0, currentPage + 2 < totalPages - 1 ? currentPage + 2 : totalPages - 1)}"
+            th:classappend="${pageNumber == currentPage} ? 'active'">
+            <a th:href="@{${stockType == 'us' ? '/stocks/us' : '/stocks/nse'}(page=${pageNumber}, searchTerm=${searchTerm})}" 
+               th:text="${pageNumber + 1}"></a>
+        </li>
+
+        <!-- Ellipsis After Current Pages -->
+        <li th:if="${currentPage < totalPages - 4}">
+            <span>...</span>
+        </li>
+
+        <!-- Last Page Link -->
+        <li th:if="${currentPage < totalPages - 3}">
+            <a th:href="@{${stockType == 'us' ? '/stocks/us' : '/stocks/nse'}(page=${totalPages - 1}, searchTerm=${searchTerm})}" 
+               th:text="${totalPages}"></a>
+        </li>
+
+        <!-- Next Button -->
+        <li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+            <a th:href="@{${stockType == 'us' ? '/stocks/us' : '/stocks/nse'}(page=${currentPage + 1}, searchTerm=${searchTerm})}" 
+               aria-label="Next">&raquo;</a>
+        </li>
+    </ul>
+</div>
+
+
+
+    </div>
+</body>
+</html>

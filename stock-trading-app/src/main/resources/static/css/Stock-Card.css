@@ -1,0 +1,36 @@
+.stock-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.stock-card:hover {
+    transform: translateY(-5px);
+}
+
+.stock-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.stock-change {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.stock-change.positive {
+    color: #28a745;
+}
+
+.stock-change.negative {
+    color: #dc3545;
+}
+
+.stock-ticker {
+    font-size: 1.25rem;
+    font-weight: bold;
+}

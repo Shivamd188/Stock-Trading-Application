@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS for Portfolio -->
+    <link rel="stylesheet" th:href="@{/css/portfolio.css}" />
+</head>
+<body>
+    <!-- Include Header -->
+    <div th:replace="header :: header"></div>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Your Stock Portfolio</h1>
+        
+        <!-- Portfolio Table -->
+        <table class="table table-hover mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Stock Symbol</th>
+                    <th>Quantity</th>
+                    <th>Purchase Price</th>
+                    <th>Purchase Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transaction : ${transactions}">
+                    <td th:text="${transaction.stockSymbol}"></td>
+                    <td th:text="${transaction.quantity}"></td>
+                    <td th:text="${transaction.price}"></td>
+                    <td th:text="${#dates.format(transaction.transactionTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Back to Dashboard Link -->
+        <div class="text-center">
+            <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+
+        <!-- Buy Stock Button -->
+        <div class="text-center mt-3">
+            <button class="btn btn-primary buy-button" data-symbol="AAPL">Buy Stock</button>
+        </div>
+
+        <!-- Toggle Stock Details -->
+        <div id="stockDetails" class="mt-4" style="display:none;">
+            <p>Stock details go here...</p>
+        </div>
+        <div class="text-center mt-3">
+            <button class="btn btn-info" onclick="toggleStockDetails()">Toggle Stock Details</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+
+    <!-- Include Footer -->
+    <div th:replace="footer :: footer"></div>
+</body>
+</html>

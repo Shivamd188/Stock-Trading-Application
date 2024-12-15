@@ -1,0 +1,39 @@
+/* Portfolio Page Styling */
+body {
+    background-color: #f8f9fa;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.table {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.thead-dark th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+td {
+    font-size: 1rem;
+}
+
+.buy-button, .btn-info {
+    width: 200px;
+    font-size: 1.1rem;
+    padding: 10px;
+}
+
+#stockDetails {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
